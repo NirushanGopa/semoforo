@@ -1,0 +1,17 @@
+package prodconsbufwaitnotify;
+
+public class Prodconsbufwaitnotify {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        BufWaitNot buff= new BufWaitNot();
+        
+        Produttore a= new Produttore(buff);
+        Consumatore b= new Consumatore(buff);
+        a.start();
+        b.start();
+    }
+    
+}

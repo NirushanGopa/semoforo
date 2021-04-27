@@ -1,0 +1,38 @@
+package prodconsbufwaitnotify;
+
+
+public class BufWaitNot {
+    private static int valore;
+    private boolean pieno=false;
+    
+    public synchronized int preleva(){
+    while(pieno==false){
+    try{
+        wait();
+        
+    }
+    catch(InterruptedException e){
+    System.out.println(e.getMessage());
+    }
+    }
+    pieno=false;
+    notify();
+    System.out.println("Consuma "+valore);
+    return valore;
+    }
+    
+    public synchronized void deposita (int value){
+    while(pieno){
+    try{
+    wait();
+    }catch(InterruptedException e){
+    System.out.println(e.getMessage());
+    }
+    
+    }
+    pieno=true;
+    valore=value;
+    notify();
+    System.out.println("Produce "+valore);
+    }
+}
